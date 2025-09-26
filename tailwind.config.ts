@@ -57,6 +57,21 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        // Nyaya custom colors
+        success: {
+          DEFAULT: "hsl(var(--success))",
+          foreground: "hsl(var(--success-foreground))",
+        },
+        warning: {
+          DEFAULT: "hsl(var(--warning))",
+          foreground: "hsl(var(--warning-foreground))",
+        },
+        community: {
+          workplace: "hsl(var(--community-workplace))",
+          domestic: "hsl(var(--community-domestic))",
+          legal: "hsl(var(--community-legal))",
+          college: "hsl(var(--community-college))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

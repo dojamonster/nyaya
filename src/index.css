@@ -2,39 +2,75 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* Nyaya Design System - Safe, Supportive, Accessible
+All colors MUST be HSL for theme consistency.
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Base colors - soft, calming palette */
+    --background: 320 20% 98%;
+    --foreground: 240 15% 15%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    /* Card components */
+    --card: 320 25% 97%;
+    --card-foreground: 240 15% 15%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    /* Interactive elements */
+    --popover: 320 25% 97%;
+    --popover-foreground: 240 15% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary - soft purple for trust and safety */
+    --primary: 280 35% 55%;
+    --primary-foreground: 320 20% 98%;
+    --primary-hover: 280 40% 50%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary - muted blue for calm */
+    --secondary: 210 25% 88%;
+    --secondary-foreground: 240 15% 25%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted tones */
+    --muted: 320 15% 95%;
+    --muted-foreground: 240 10% 50%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Accent - warm for comfort */
+    --accent: 340 30% 85%;
+    --accent-foreground: 240 15% 25%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Destructive - soft red for safety */
+    --destructive: 0 50% 60%;
+    --destructive-foreground: 320 20% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Borders and inputs */
+    --border: 320 20% 90%;
+    --input: 320 20% 92%;
+    --ring: 280 35% 55%;
+
+    /* Custom tokens for Nyaya */
+    --success: 140 45% 45%;
+    --success-foreground: 320 20% 98%;
+    --warning: 45 90% 60%;
+    --warning-foreground: 240 15% 15%;
+
+    /* Community colors */
+    --community-workplace: 280 35% 55%;
+    --community-domestic: 340 40% 60%;
+    --community-legal: 210 45% 55%;
+    --community-college: 180 40% 55%;
+
+    /* Special gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(280 35% 55%), hsl(340 40% 60%));
+    --gradient-safe: linear-gradient(180deg, hsl(320 25% 97%), hsl(320 15% 95%));
+
+    /* Shadows for depth */
+    --shadow-soft: 0 2px 8px hsl(240 15% 15% / 0.08);
+    --shadow-medium: 0 4px 16px hsl(240 15% 15% / 0.12);
+    --shadow-strong: 0 8px 32px hsl(240 15% 15% / 0.16);
+
+    /* Animation timing */
+    --animation-fast: 0.15s ease-out;
+    --animation-normal: 0.25s ease-out;
+    --animation-slow: 0.4s ease-out;
 
     --radius: 0.5rem;
 
