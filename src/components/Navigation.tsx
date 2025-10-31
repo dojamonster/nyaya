@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { 
@@ -9,7 +9,8 @@ import {
   User, 
   LogOut, 
   AlertTriangle,
-  Shield
+  Shield,
+  Sparkles
 } from 'lucide-react';
 
 const navItems = [
@@ -23,6 +24,15 @@ const navItems = [
 export const Navigation = () => {
   const location = useLocation();
   const [showPanicConfirm, setShowPanicConfirm] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handlePanicButton = () => {
     if (showPanicConfirm) {
@@ -40,27 +50,45 @@ export const Navigation = () => {
   };
 
   return (
-    <nav className="bg-card border-b border-border shadow-soft">
+    <nav className={`sticky top-0 z-50 transition-all duration-300 ${
+      isScrolled 
+        ? 'glass-effect shadow-medium' 
+        : 'bg-card/80 backdrop-blur-sm border-b border-border/50'
+    }`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <Shield className="h-8 w-8 text-primary" />
-            <span className="text-xl font-bold text-foreground">Nyaya</span>
+          <Link to="/" className="flex items-center space-x-2 group">
+            <div className="relative">
+              <Shield className="h-8 w-8 text-primary transition-transform group-hover:scale-110 group-hover:rotate-6" />
+              <Sparkles className="h-3 w-3 text-primary absolute -top-1 -right-1 animate-pulse" />
+            </div>
+            <span className="text-xl font-bold bg-gradient-to-r from-primary to-pink-500 bg-clip-text text-transparent">
+              Nyaya
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-1">
-            {navItems.map((item) => {
+            {navItems.map((item, index) => {
               const Icon = item.icon;
               const isActive = location.pathname === item.path;
               
               return (
-                <Link key={item.name} to={item.path}>
+                <Link 
+                  key={item.name} 
+                  to={item.path}
+                  className="animate-fade-in"
+                  style={{ animationDelay: `${index * 50}ms` }}
+                >
                   <Button 
                     variant={isActive ? "secondary" : "ghost"} 
                     size="sm"
-                    className="flex items-center space-x-2"
+                    className={`flex items-center space-x-2 transition-all duration-200 ${
+                      isActive 
+                        ? 'shadow-soft scale-105' 
+                        : 'hover:scale-105 hover:-translate-y-0.5'
+                    }`}
                   >
                     <Icon className="h-4 w-4" />
                     <span>{item.name}</span>
@@ -77,9 +105,13 @@ export const Navigation = () => {
               variant={showPanicConfirm ? "destructive" : "outline"}
               size="sm"
               onClick={handlePanicButton}
-              className="flex items-center space-x-1"
+              className={`flex items-center space-x-1 transition-all duration-200 ${
+                showPanicConfirm 
+                  ? 'animate-pulse shadow-strong' 
+                  : 'hover:scale-105'
+              }`}
             >
-              <AlertTriangle className="h-4 w-4" />
+              <AlertTriangle className={`h-4 w-4 ${showPanicConfirm ? 'animate-bounce' : ''}`} />
               <span className="hidden sm:inline">
                 {showPanicConfirm ? 'Click again to exit' : 'Panic'}
               </span>
@@ -90,7 +122,7 @@ export const Navigation = () => {
               variant="ghost" 
               size="sm"
               onClick={handleLogout}
-              className="flex items-center space-x-1"
+              className="flex items-center space-x-1 transition-all hover:scale-105"
             >
               <LogOut className="h-4 w-4" />
               <span className="hidden sm:inline">Logout</span>

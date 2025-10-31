@@ -7,7 +7,8 @@ import {
   Hash, 
   X,
   Image,
-  Lock
+  Lock,
+  Sparkles
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
@@ -85,10 +86,18 @@ export const CreatePost = ({ onSubmit, isSecure = false }: CreatePostProps) => {
   };
 
   return (
-    <div className="bg-card rounded-xl p-6 shadow-soft border">
+    <div className="bg-gradient-to-br from-card to-purple-50/30 rounded-xl p-6 shadow-medium border border-purple-100 hover:shadow-strong transition-all duration-300">
       <div className="flex items-center space-x-2 mb-4">
-        {isSecure && <Lock className="h-5 w-5 text-primary" />}
-        <h3 className="font-semibold text-foreground">
+        {isSecure ? (
+          <div className="p-2 bg-gradient-to-br from-primary to-pink-500 rounded-lg">
+            <Lock className="h-5 w-5 text-white" />
+          </div>
+        ) : (
+          <div className="p-2 bg-gradient-to-br from-primary to-pink-500 rounded-lg">
+            <Sparkles className="h-5 w-5 text-white" />
+          </div>
+        )}
+        <h3 className="font-semibold text-foreground text-lg">
           {isSecure ? 'Share Secure Evidence' : 'Share Your Voice'}
         </h3>
       </div>
@@ -102,7 +111,7 @@ export const CreatePost = ({ onSubmit, isSecure = false }: CreatePostProps) => {
             ? "Share evidence or important information securely..." 
             : "What's on your mind? Share your experience, offer support, or ask for help..."
           }
-          className="min-h-[120px] resize-none border-input focus:border-primary"
+          className="min-h-[120px] resize-none border-input focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all bg-white/50"
           maxLength={500}
         />
         
@@ -116,8 +125,7 @@ export const CreatePost = ({ onSubmit, isSecure = false }: CreatePostProps) => {
             {selectedTags.map((tag) => (
               <Badge 
                 key={tag} 
-                variant="secondary"
-                className="flex items-center space-x-1"
+                className="flex items-center space-x-1 bg-gradient-to-r from-primary/90 to-pink-500/90 text-white hover:from-primary hover:to-pink-500 transition-all animate-scale-in"
               >
                 <Hash className="h-3 w-3" />
                 <span>{tag}</span>
@@ -126,7 +134,7 @@ export const CreatePost = ({ onSubmit, isSecure = false }: CreatePostProps) => {
                   variant="ghost"
                   size="sm"
                   onClick={() => removeTag(tag)}
-                  className="h-4 w-4 p-0 ml-1 hover:bg-destructive hover:text-destructive-foreground"
+                  className="h-4 w-4 p-0 ml-1 hover:bg-white/20 text-white"
                 >
                   <X className="h-3 w-3" />
                 </Button>
@@ -145,7 +153,7 @@ export const CreatePost = ({ onSubmit, isSecure = false }: CreatePostProps) => {
               onChange={(e) => setCustomTag(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder="Add custom tag"
-              className="w-full pl-10 pr-4 py-2 border border-input rounded-md focus:border-primary focus:outline-none"
+              className="w-full pl-10 pr-4 py-2 border border-input rounded-md focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all bg-white/50"
             />
           </div>
           <Button 
@@ -174,7 +182,7 @@ export const CreatePost = ({ onSubmit, isSecure = false }: CreatePostProps) => {
                     variant="outline"
                     size="sm"
                     onClick={() => addTag(tag)}
-                    className="text-xs"
+                    className="text-xs hover:bg-gradient-to-r hover:from-primary/10 hover:to-pink-500/10 hover:text-primary hover:border-primary/50 transition-all hover:scale-105"
                   >
                     <Hash className="h-3 w-3 mr-1" />
                     {tag}
@@ -197,7 +205,7 @@ export const CreatePost = ({ onSubmit, isSecure = false }: CreatePostProps) => {
           <Button 
             type="submit" 
             disabled={!content.trim()}
-            className="flex items-center space-x-2"
+            className="flex items-center space-x-2 bg-gradient-to-r from-primary to-pink-500 hover:from-primary/90 hover:to-pink-500/90 shadow-medium hover:shadow-strong transition-all hover:scale-105"
           >
             <Send className="h-4 w-4" />
             <span>{isSecure ? 'Post Securely' : 'Post'}</span>
